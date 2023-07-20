@@ -1,45 +1,26 @@
 import './App.css';
-import {useState,useEffect,useReducer} from "react";
-
+import {useRef,useState} from "react";
 
 
 
 function App() {
-  const [checked,setChecked]=useReducer((checked)=> !checked,
-  false);
-  // const [secondary,setSecondary]=useState("tired");
+  const colors=["#4b0082","#ff0000","#0000ff","#00ff00","#ffff00","#00ffff","#ff00ff","#c0c0c0","#808080","#800000","#808000","#008000","#800080","#008080","#000080","#ffffff","#000000"]
+  const backgroundcolor=useRef("")
+  console.log(backgroundcolor)
 
-
-  // useEffect(()=>{
-  //   console.log("It's ",emotion,'right now');
-  // },[emotion])
-  
-
+  const styleparagraph=()=>{
+    backgroundcolor.current.style.color=colors[Math.floor(Math.random()*colors.length)]
+    
+  }
   return (
     <div className="App">
-      <input type="checkbox" value={checked} onChange={setChecked
-      }/>
-      <label>
-        {checked ? "checked" : "not checked"}
-      </label>
-        </div>
-    // <div className="App">
-    //   <h1>Current emotion is {emotion}</h1>
-    //   <button onClick={()=> {
-    //     setEmotion("excited")
-    //   }}>Excited</button>
-    //   <button onClick={()=> {
-    //     setEmotion("sad")
-    //     }}>Sad</button>
-    //   <h1>Current emotion is {secondary}</h1>
-    //   <button onClick={()=> {
-    //     setSecondary("energetic")
-    //   }}>Energetic</button>
-    //   <button onClick={()=> {
-    //     setSecondary("lazy")
-    //     }}>Lazy</button>
-    // </div>
-  );
+      <button onClick={styleparagraph}>click-me</button>
+      <p ref={backgroundcolor}>Hello</p>
+    </div>
+  )
+
+  
+
 }
 
 export default App;
