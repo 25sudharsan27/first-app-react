@@ -1,25 +1,26 @@
 import './App.css';
-import {useRef,useState} from "react";
+import {useRef,useState,useEffect} from "react";
 
 
 
-function App() {
-  const colors=["#4b0082","#ff0000","#0000ff","#00ff00","#ffff00","#00ffff","#ff00ff","#c0c0c0","#808080","#800000","#808000","#008000","#800080","#008080","#000080","#ffffff","#000000"]
-  const backgroundcolor=useRef("")
-  console.log(backgroundcolor)
-
-  const styleparagraph=()=>{
-    backgroundcolor.current.style.color=colors[Math.floor(Math.random()*colors.length)]
-    
-  }
+function GithubUser({name}){
   return (
-    <div className="App">
-      <button onClick={styleparagraph}>click-me</button>
-      <p ref={backgroundcolor}>Hello</p>
+    <div>
+      <h1>{name}</h1>
     </div>
   )
+}
 
-  
+function App() {
+  const [data,setData]=useState(null);
+  useEffect(()=>{
+    fetch("https://api.github.com/users/25sudharsan27").then((response)=>response.json()).then(setData);
+  },[])
+  if (data)
+    return  <GithubUser name={data.name} />;
+    
+
+    
 
 }
 
